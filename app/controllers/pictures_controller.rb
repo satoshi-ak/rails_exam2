@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: %i[ show edit update destroy ]
-
+  skip_before_action :login_required, only: [:new, :create, :show, :edit, :confirm, :destroy]
   # GET /pictures or /pictures.json
   def index
     @pictures = Picture.all
@@ -18,16 +18,20 @@ class PicturesController < ApplicationController
     @picture = Picture.new
   end
 end
+
 def confirm
-  @picture = Picture.new(picture_params)
+  @picture = current_user.pictures.build(picture_params)
+  @picture.users_id = current_user.id
+  render :new if @picture.invalid?
   # GET /pictures/1/edit
 end
   def edit
-
+    @picture = Picture.find(params[:id])
   end
   # POST /pictures or /pictures.json
   def create
-    @picture = Picture.new(picture_params)
+    @picture = current_user.pictures.build(picture_params)
+    @picture.user_id = current_user.id
     respond_to do |format|
       if @picture.save
         format.html { redirect_to @picture, notice: "Picture was successfully created." }
@@ -38,7 +42,6 @@ end
       end
     end
   end
-
   # PATCH/PUT /pictures/1 or /pictures/1.json
   def update
     respond_to do |format|
