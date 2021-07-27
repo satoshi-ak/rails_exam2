@@ -18,9 +18,9 @@
         <td><%= picture.post %></td>
         <td><%= image_tag picture.image.url, style:'width:200px;height:150px' %></td>
         <td><%= picture.user.name%></td>
-        <td><%= link_to 'Show', picture %></td>
-        <td><%= link_to 'Edit', edit_picture_path(picture.id) %></td>
-        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="label label-success btn"><%= link_to 'Show', picture %></td>
+        <td class="label label-warning btn"><%= link_to 'Edit', edit_picture_path(picture.id) %></td>
+        <td class="label label-danger btn"><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
