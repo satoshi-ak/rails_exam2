@@ -75,6 +75,6 @@ end
 
     # Only allow a list of trusted parameters through.
    def picture_params
-      params.require(:picture).permit(:image, :image_cache)
+      params.require(:picture).permit(:image, :image_cache, :post)
   end
 end

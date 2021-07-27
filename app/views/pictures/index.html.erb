@@ -5,15 +5,18 @@
 <table>
   <thead>
     <tr>
+      <th>Post Comment</th>
       <th>Image</th>
-      <th colspan="3"></th>
+      <th>Posted By</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @pictures.each do |picture| %>
       <tr>
-        <td><%= picture.image %></td>
+        <td><%= picture.post %></td>
+        <td><%= image_tag picture.image.url, style:'width:200px;height:150px' %></td>
         <td><%= picture.user.name%></td>
         <td><%= link_to 'Show', picture %></td>
         <td><%= link_to 'Edit', edit_picture_path(picture.id) %></td>
