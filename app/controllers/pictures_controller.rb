@@ -5,33 +5,25 @@ class PicturesController < ApplicationController
   def index
     @pictures = Picture.all
   end
-
-
   def show
     @picture = Picture.find(params[:id])
     @comment = Comment.new
     @comments = @picture.comments
   end
-
-
   def new
     if params[:back]
     @picture = Picture.new(picture_params)
   else
     @picture = Picture.new
   end
-end
-
-def confirm
+ end
+ def confirm
   @picture = current_user.pictures.build(picture_params)
-  @picture.users_id = current_user.id
   render :new if @picture.invalid?
-
-end
-  def edit
-    @picture = Picture.find(params[:id])
-  end
-
+ end
+ def edit
+   @picture = Picture.find(params[:id])
+ end
   def create
     @picture = current_user.pictures.build(picture_params)
     @picture.user_id = current_user.id
@@ -45,7 +37,6 @@ end
       end
     end
   end
-
   def update
     respond_to do |format|
       if @picture.update(picture_params)
@@ -57,8 +48,6 @@ end
       end
     end
   end
-
-
   def destroy
     @picture.destroy
     respond_to do |format|
@@ -66,15 +55,12 @@ end
       format.json { head :no_content }
     end
   end
-
   private
 
-    def set_picture
-      @picture = Picture.find(params[:id])
-    end
-
-  
-   def picture_params
-      params.require(:picture).permit(:image, :image_cache, :post)
+  def set_picture
+    @picture = Picture.find(params[:id])
   end
-end
+  def picture_params
+    params.require(:picture).permit(:image, :image_cache, :post)
+  end
+  end

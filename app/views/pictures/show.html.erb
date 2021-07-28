@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Image:</strong>
   <%= image_tag @picture.image.url,style:'width:800px;height:400px' %>
@@ -8,6 +7,5 @@
     <strong>Comment:</strong>
   <%= @picture.post %>
 </p>
-
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>
